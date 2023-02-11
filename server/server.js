@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 5
 // API Routes
 const playersRoutes = require("./routes/player-api");
 const gamesRoutes = require("./routes/game-api");
+const performanceRoutes = require("./routes/performance-api");
 // const seedApiRoutes = require("./routes/seed-api");
 // const queryApiRoutes = require("./routes/query-api");
 // const userDatabaseApiRoutes = require("./routes/user-database-api");
@@ -55,6 +56,7 @@ const gamesRoutes = require("./routes/game-api");
 // app.use("/api/query", queryApiRoutes(dbSeedQueryHelpers))
 app.use("/api/players", playersRoutes(dbHelpers));
 app.use("/api/games", gamesRoutes(dbHelpers));
+app.use("/api/performances", performanceRoutes(dbHelpers));
 
 
 /**

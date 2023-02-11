@@ -45,14 +45,15 @@ module.exports = ({ queryDBParams, queryDB }) => {
   })
 
   router.get("/", (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
+    console.log('req.params', id);
 
     if (!id) {
       queryDB(
         `SELECT * FROM games;`
       ).then(data => {
         res.json(data);
-        console.log(data)
+        // console.log(data)
       })
         .catch(err => {
           res.status(500).json({ error: err.message });
@@ -71,6 +72,19 @@ module.exports = ({ queryDBParams, queryDB }) => {
         });
     }
   });
+
+  router.get("/:id", (req, res) => {
+    const id = req.params.id
+    console.log('id', id)
+    queryDBParams('SELECT * FROM games WHERE id = $1;', [id]
+      ).then(data => {
+        res.json(data);
+        console.log(data)
+      })
+        .catch(err => {
+          res.status(500).json({ error: err.message });
+        });
+      });
 
   return router;
 };

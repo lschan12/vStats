@@ -2,10 +2,12 @@
 
 const deepCopy = (data) => JSON.parse(JSON.stringify(data));
 
-export const CREATE_NEW_PLAYER = 'CREATE_NEW_PLAYER'
-export const GET_PLAYERS = 'GET_PLAYERS'
-export const GET_GAMES = 'GET_GAMES'
-export const CREATE_NEW_GAME = "CREATE_NEW_GAME"
+export const CREATE_NEW_PLAYER = 'CREATE_NEW_PLAYER';
+export const GET_PLAYERS = 'GET_PLAYERS';
+export const GET_GAMES = 'GET_GAMES';
+export const CREATE_NEW_GAME = "CREATE_NEW_GAME";
+export const SELECT_GAME = "SELECT_GAME";
+export const SELECT_PERFORMANCE = 'SELECT_PERFORMANCE';
 
 const globalReducer = (state, action) => {
   const reducers = {
@@ -46,6 +48,26 @@ const globalReducer = (state, action) => {
       return {
         ...newState,
         gameState
+      }
+    },
+    
+    SELECT_GAME: state => {
+      const newState = deepCopy(state);
+      let selectedGameState = newState.selectedGameState;
+      selectedGameState = action.game;
+      return {
+        ...newState,
+        selectedGameState
+      }
+    },
+
+    SELECT_PERFORMANCE: state => {
+      const newState = deepCopy(state);
+      let selectedPerformancesState = newState.selectedPerformancesState;
+      selectedPerformancesState = action.performance;
+      return {
+        ...newState,
+        selectedPerformancesState
       }
     }
 
